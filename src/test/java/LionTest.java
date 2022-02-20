@@ -13,21 +13,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //@RunWith(Parameterized.class)
 public class LionTest {
 
-
+    @Test
+    public void testCheckReturnNotBinarySex() { //doesHaveMane
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+            Lion lion = new Lion("Самкамец");
+            lion.doesHaveMane();
+        });
+    }
 
     @Test
-    public void checkReturnMane () throws Exception { //doesHaveMane
+    public void testCheckReturnMane () throws Exception { //doesHaveMane
+        System.out.println("test");
         Lion lion = new Lion("Самец"); // "Самец"
         boolean actual = lion.doesHaveMane();
         boolean expected = true;
         assertEquals(expected, actual);
+
 
     }
 
 
 
     @Test
-    public void checkReturnFemale () throws Exception { //doesHaveMane
+    public void testCheckReturnFemale() throws Exception { //doesHaveMane
         Lion lion = new Lion("Самка");
         boolean actual = lion.doesHaveMane();
         boolean expected = false;
@@ -35,17 +43,11 @@ public class LionTest {
 
     }
 
-    @Test
-    public void checkReturnNotBinarySex() { //doesHaveMane
-        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
-            Lion lion = new Lion("Самкамец");
-            lion.doesHaveMane();
-        });
-    }
+
 
     @ParameterizedTest
     @ValueSource(strings = {"Самец", "Самка"})
-    public void checkKittensCountForLionWithoutParameter(String sex) throws Exception { //getKittens
+    public void testCheckKittensCountForLionWithoutParameter(String sex) throws Exception { //getKittens
         Lion lion = new Lion(sex);
         int actual = lion.getKittens(); // вызвали проверяемый метод
         int expected = 1;
@@ -54,7 +56,7 @@ public class LionTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"Самец", "Самка"})
-    public void checkKittensCountForLionWithParameter(String sex) throws Exception { //getKittens
+    public void testCheckKittensCountForLionWithParameter(String sex) throws Exception { //getKittens
         Lion lion = new Lion(sex);
         int actual = lion.getKittens(10); // вызвали проверяемый метод
         int expected = 10;
@@ -63,7 +65,7 @@ public class LionTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"Самец", "Самка"})
-    public void checkLionFamily(String sex) throws Exception { //getFamily
+    public void testCheckLionFamily(String sex) throws Exception { //getFamily
         Lion lion = new Lion(sex);
         String actual = lion.getFamily(); // вызвали проверяемый метод
         String expected = "Кошачьи";
@@ -72,7 +74,7 @@ public class LionTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"Самец", "Самка"})
-    public void checkLionEat(String sex) throws Exception { //eatMeat
+    public void testCheckLionEat(String sex) throws Exception { //eatMeat
         Lion lion = new Lion(sex);
         List<String> actual = lion.eatMeat(); // вызвали проверяемый метод
         List<String> expected = List.of("Животные", "Птицы", "Рыба");

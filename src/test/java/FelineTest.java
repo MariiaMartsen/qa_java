@@ -15,28 +15,28 @@ public class FelineTest {
 
 
     @Test
-    public void getWhatTypeOfMeatEatFeline() throws Exception { //eatMeat
+    public void testGetWhatTypeOfMeatEatFeline() throws Exception { //eatMeat
         List<String> actual = feline.eatMeat();
         List<String> expected = List.of("Животные", "Птицы", "Рыба");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getWhatTheFamilyFelineBelongs() throws Exception { //getFamily
+    public void testGetWhatTheFamilyFelineBelongs() throws Exception { //getFamily
         String actual = feline.getFamily();
         String expected = "Кошачьи";
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getKittensCountWithoutNumber() { // getKittens()
+    public void testGetKittensCountWithoutNumber() { // getKittens()
         int actual = feline.getKittens(); // вызвали проверяемый метод
         int expected = 1;
         assertEquals(expected, actual); // сравнили ожидаемый результат с фактическим
     }
 
     @Test
-    public void getKittensCountWithNumber() { //getKittens(par)
+    public void testGetKittensCountWithNumber() { //getKittens(par)
         int kittensCount = 9;
         int actual = feline.getKittens(kittensCount); // вызвали проверяемый метод
         int expected = 9;
