@@ -1,81 +1,67 @@
 import com.example.Lion;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import static org.junit.Assert.*;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+@RunWith(Parameterized.class)
 public class LionTest {
+    private final String sex;
 
-    @Test
-    public void testCheckReturnNotBinarySex() { //doesHaveMane
-        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
-            Lion lion = new Lion("Самкамец");
+    public LionTest(String sex) {
+        this.sex = sex;
+    }
+
+    @Parameterized.Parameters // добавили аннотацию
+    public static Object[][] getParameters() { //sex
+        return new Object[][]{
+                {"Самец"},
+                {"Самка"}
+        };
+    }
+
+    @Test(expected = Exception.class)
+    public void testCheckReturnNotBinarySex() throws Exception { // ни самка, ни самец
+            Lion lion = new Lion("Самкамец"); //
             lion.doesHaveMane();
-        });
-    }
+        }
 
     @Test
-    public void testCheckReturnMane () throws Exception { //doesHaveMane
-        System.out.println("test");
-        Lion lion = new Lion("Самец");
-        boolean actual = lion.doesHaveMane();
-        boolean expected = true;
-        assertEquals(expected, actual);
-
-
-    }
-
-
-
-    @Test
-    public void testCheckReturnFemale() throws Exception { //doesHaveMane
-        Lion lion = new Lion("Самка");
-        boolean actual = lion.doesHaveMane();
-        boolean expected = false;
-        assertEquals(expected, actual);
-
-    }
-
-
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Самец", "Самка"})
-    public void testCheckKittensCountForLionWithoutParameter(String sex) throws Exception { //getKittens
+    public void testCheckKittensCountForLionWithoutParameter() throws Exception {
         Lion lion = new Lion(sex);
         int actual = lion.getKittens();
         int expected = 1;
-        assertEquals(expected, actual);
+        assertEquals("Получено некорректное количество kittens без параметра", expected, actual);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Самец", "Самка"})
-    public void testCheckKittensCountForLionWithParameter(String sex) throws Exception { //getKittens
+    @Test
+    public void testCheckKittensCountForLionWithParameter() throws Exception { //getKittens
         Lion lion = new Lion(sex);
         int actual = lion.getKittens(10);
         int expected = 10;
-        assertEquals(expected, actual);
+        assertEquals("Получено некорректное количество kittens c параметром",expected, actual);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Самец", "Самка"})
-    public void testCheckLionFamily(String sex) throws Exception { //getFamily
-        Lion lion = new Lion(sex);
-        String actual = lion.getFamily();
-        String expected = "Кошачьи";
-        assertEquals(expected, actual);
+    @Test
+    public void testCheckReturnFemale() throws Exception { // проверка самки
+        Lion lion = new Lion("Самка");
+        boolean actual = lion.doesHaveMane();
+        assertFalse("Ошибка с полом Самка", actual);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Самец", "Самка"})
-    public void testCheckLionEat(String sex) throws Exception { //eatMeat
-        Lion lion = new Lion(sex);
-        List<String> actual = lion.eatMeat();
-        List<String> expected = List.of("Животные", "Птицы", "Рыба");
-        assertEquals(expected, actual);
+    @Test
+    public void testCheckReturnMane() throws Exception { //проверка самца
+        Lion lion = new Lion("Самец");
+        boolean actual = lion.doesHaveMane();
+        assertTrue("Ошибка с полом Самец", actual);
     }
+}
 
-    }
+
+
+
+
+
+
+
+
