@@ -7,11 +7,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//@RunWith(MockitoJUnitRunner.class)
+
 public class FelineTest {
     Feline feline = new Feline(); //IFeline
-   // @Mock
-   // Feline feline;
 
 
     @Test
