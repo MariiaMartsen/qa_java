@@ -1,5 +1,4 @@
 package com.example;
-
 import java.util.List;
 
 public class Lion extends Animal implements IFeline, Predator{
@@ -17,7 +16,15 @@ public class Lion extends Animal implements IFeline, Predator{
         }
     }
 
-
+    public void getSex(boolean hasMane) {
+        //String sex = "пол не задан";
+        if (hasMane = true) {
+            String sex = "Самец";
+        }
+        else if (hasMane = false) {
+            String sex = "Самка";
+        }
+    }
 
     public boolean doesHaveMane() {
         return hasMane;
